@@ -35,7 +35,8 @@ category_pos = columns.index('category')
 restaurants = []
 for business in businesses:
     category = business[category_pos].lower()
-    if 'restaurant' in category:
+    in_town = (business[address_pos] != 'BUSINESS - OUT OF TOWN')
+    if in_town and 'restaurant' in category:
         name = business[name_pos].title()
         address = business[address_pos]
 
@@ -46,6 +47,10 @@ for business in businesses:
             'name': name,
             'address': address,
         })
+restaurants = {n: r for n,r in enumerate(restaurants)}
 
-print(json.dumps(restaurants, indent=2))
+if os.path.exists('restaurants.json'):
+    newData = open(FILENAME, 'r').read()
+else:
+    open('restaurants.json', 'w').write(json.dumps(restaurants, indent=2))
 
