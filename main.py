@@ -49,8 +49,8 @@ for business in businesses:
         })
 restaurants = {n: r for n,r in enumerate(restaurants)}
 
-if os.path.exists('businesses.json'):
+if os.path.exists('restaurants.json'):
     newData = open(FILENAME, 'r').read()
 else:
-    open('businesses.json', 'w').write(json.dumps(restaurants, indent=2))
+    open('restaurants.json', 'w').write(json.dumps(restaurants, indent=2))
 
